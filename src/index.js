@@ -332,7 +332,7 @@ class QRCodeCanvas extends React.PureComponent<QRProps, {imgLoaded: boolean}> {
     const canvasStyle = {height: size, width: size, ...style};
     let img = null;
     let imgSrc = imageSettings && imageSettings.src;
-    let cross = imageSettings && imageSettings.crossOrigin : null;
+    let cross = imageSettings && imageSettings.crossOrigin ? imageSettings.crossOrigin : null;
     if (imageSettings != null && imgSrc != null) {
       img = (
         <img
@@ -397,7 +397,7 @@ class QRCodeSVG extends React.PureComponent<QRProps> {
     const calculatedImageSettings = getImageSettings(this.props, cells);
 
     let image = null;
-    let cross = imageSettings && imageSettings.crossOrigin : null;
+    let cross = imageSettings && imageSettings.crossOrigin ? imageSettings.crossOrigin : null;
     if (imageSettings != null && calculatedImageSettings != null) {
       if (calculatedImageSettings.excavation != null) {
         cells = excavateModules(cells, calculatedImageSettings.excavation);
