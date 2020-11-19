@@ -61,6 +61,7 @@ type QRProps = {
     excavate: boolean,
     x?: number,
     y?: number,
+    crossOrigin?: string,
   },
 };
 
@@ -88,6 +89,7 @@ const PROP_TYPES =
           excavate: PropTypes.bool,
           x: PropTypes.number,
           y: PropTypes.number,
+          crossOrigin: PropTypes.string,
         }),
       }
     : {};
@@ -330,12 +332,14 @@ class QRCodeCanvas extends React.PureComponent<QRProps, {imgLoaded: boolean}> {
     const canvasStyle = {height: size, width: size, ...style};
     let img = null;
     let imgSrc = imageSettings && imageSettings.src;
+    let cross = imageSettings && imageSettings.crossOrigin : null;
     if (imageSettings != null && imgSrc != null) {
       img = (
         <img
           src={imgSrc}
           style={{display: 'none'}}
           onLoad={this.handleImageLoad}
+          crossOrigin={cross}
           ref={(ref: ?HTMLImageElement): ?HTMLImageElement =>
             (this._image = ref)
           }
@@ -393,6 +397,7 @@ class QRCodeSVG extends React.PureComponent<QRProps> {
     const calculatedImageSettings = getImageSettings(this.props, cells);
 
     let image = null;
+    let cross = imageSettings && imageSettings.crossOrigin : null;
     if (imageSettings != null && calculatedImageSettings != null) {
       if (calculatedImageSettings.excavation != null) {
         cells = excavateModules(cells, calculatedImageSettings.excavation);
@@ -406,6 +411,7 @@ class QRCodeSVG extends React.PureComponent<QRProps> {
           x={calculatedImageSettings.x + margin}
           y={calculatedImageSettings.y + margin}
           preserveAspectRatio="none"
+          crossOrigin={cross}
         />
       );
     }
