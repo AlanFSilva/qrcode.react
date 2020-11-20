@@ -1,6 +1,6 @@
 'use strict';
 
-var QRCode = require('..');
+var QRCode = require('../src/index');
 var React = require('react');
 var ReactDOM = require('react-dom');
 
